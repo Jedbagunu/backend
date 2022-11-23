@@ -4,7 +4,6 @@ const entryController = require('../controllers/entryController')
 const auth = require('../auth')
 
 
-//create product (admin only)
 router.post('/createEntry', auth.verify, (request, response)=>{
 	const data = {
 		entry: request.body,
@@ -16,7 +15,7 @@ router.post('/createEntry', auth.verify, (request, response)=>{
 	
 })
 
-//update my product (admin only)
+
 router.patch('/:entryId/update', auth.verify, (request, response)=>{
 	const data = {
 		entry: request.body,
@@ -29,7 +28,6 @@ router.patch('/:entryId/update', auth.verify, (request, response)=>{
 
 
 
-//retrieve all product
 router.get('/all', (request, response)=>{
 	entryController.allEntry().then((result)=>{
 		response.send(result)
@@ -37,7 +35,7 @@ router.get('/all', (request, response)=>{
 })
 
 
-//retrieve single product
+
 router.get('/:entryId/single', (request, response) => {
 	entryController.getEntry(request.params.entryId).then((result)=>{
 		response.send(result)
@@ -45,9 +43,6 @@ router.get('/:entryId/single', (request, response) => {
 })
 
 
-
-
-//Archive my product
 router.patch('/:entryId/archive', auth.verify, (request, response) => {
 	const data = {
 		entry: request.body,
@@ -58,7 +53,7 @@ router.patch('/:entryId/archive', auth.verify, (request, response) => {
 	})
 })
 
-//Retrieve Archived product
+
 router.patch('/:entryId/activate', auth.verify, (request, response) => {
 	const data = {
 		entry: request.body,
@@ -69,7 +64,7 @@ router.patch('/:entryId/activate', auth.verify, (request, response) => {
 	})
 })
 
-//delete
+
 router.delete('/:entryId/delete', (request, response) => {
 	entryController.deleteEntry(request.params.entryId).then((result)=>{
 		response.send(result)

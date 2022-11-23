@@ -1,7 +1,5 @@
-//IMPORTS
 const User = require('../models/User')
 const Entry = require('../models/Entry')
-
 const bcrypt = require('bcrypt')
 const auth = require('../auth')
 
@@ -79,13 +77,7 @@ module.exports.getAllUsers =() => {
 			return result
 		})
 }
-/*//get single user
-module.exports.getUser = (user_Id) => {
-	return User.findById(user_Id).then((result)=>{
-		return result
-	})
-}*/
-//admin login
+
 module.exports.admin = (data) => {
 		if (data.isAdmin) {
 		return User.findOne({email: data.email}).then((result)=>{
@@ -100,7 +92,6 @@ module.exports.admin = (data) => {
 }
 
 
-//Set a user to admin (get user ID)
 module.exports.setToAdmin = (user_Id, new_data) => {
 	return User.findByIdAndUpdate(user_Id).then((result, error) =>{
 		if (error) {
@@ -121,7 +112,7 @@ module.exports.setToAdmin = (user_Id, new_data) => {
 	})
 		
 }
-//create order 
+
 module.exports.createOrder = async (data) => {
 	let is_user_updated = await User.findById(data.userId).then((user) => {
 		user.entries.push({
@@ -148,7 +139,7 @@ module.exports.createOrder = async (data) => {
 	
 }
 
-//retrieve all Orders
+
 module.exports.allOrders =(data) => {
 	if (data.isAdmin) {
 		return User.find({}).then((result)=>{
@@ -158,11 +149,9 @@ module.exports.allOrders =(data) => {
 	let message = Promise.resolve ({message:'Request for admin access'})
 			return message.then((value)=>{
 				return value
-			})
-		
+			})		
 }
 
-//Retrieve order
 module.exports.retrieveOrder = (userId, data) => {
 		return User.find(userId.orders).then((result)=>{
 		return result

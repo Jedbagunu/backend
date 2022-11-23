@@ -39,12 +39,7 @@ router.get('/', (request, response)=>{
 		response.send(result)
 	})
 })
-/*//get single user
-router.get('/:userId', (request, response) => {
-	userController.getUser(request.params.userId).then((result)=>{
-		response.send(result)
-	})
-})*/
+
 //admin login
 router.post('/admin', auth.verify, (request, response)=>{
 	let data = {
@@ -91,7 +86,6 @@ router.get('/allOrders', auth.verify, (request, response)=>{
 })
 
 
-
 //retrieve order
 router.get('/order', (request, response) => {
 		const data = {
@@ -103,10 +97,6 @@ router.get('/order', (request, response) => {
 	})
 })
  
-
-
-
-
 
 module.exports = router
 

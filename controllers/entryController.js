@@ -1,10 +1,9 @@
 //IMPORTS
 const Entry = require('../models/Entry')
 const User = require('../models/User')
-
 const auth = require('../auth')
 
-//Create Product
+
 module.exports.createEntry =(data) => {
 	if(data.isAdmin){
 		let new_entry = new Entry({
@@ -24,7 +23,7 @@ module.exports.createEntry =(data) => {
 		})
 
 	}
-	//return Promise.resolve('User must be admin')-- 
+	
 	let message = Promise.resolve({
 		message: 'User must be admin to access this.'
 	})
@@ -34,7 +33,7 @@ module.exports.createEntry =(data) => {
 	})
 }
 
-//Retrieve all products
+
 module.exports.allEntry =() => {
 		return Entry.find({}).then((result)=>{
 			return result
@@ -48,7 +47,7 @@ module.exports.getEntry = (entryId) => {
 	})
 }
 
-//update my product
+
 module.exports.updateEntry = (entryId, data) => {
 	if(data.isAdmin) {
 		return Entry.findByIdAndUpdate(entryId, {
@@ -72,7 +71,7 @@ module.exports.updateEntry = (entryId, data) => {
 			})
 }
 
-//Archive my product
+
 module.exports.archive = (entryId, data) => {
 	if(data.isAdmin){
 	return Entry.findByIdAndUpdate(entryId, {isActive:false}).then((archive, error) =>{
@@ -87,7 +86,7 @@ module.exports.archive = (entryId, data) => {
 				return value
 			})
 }
-//retrieve archived my product
+
 module.exports.activate = (entryId, data) => {
 	if(data.isAdmin){
 	return Entry.findByIdAndUpdate(entryId, {isActive:true}).then((archive, error) =>{
@@ -102,8 +101,7 @@ module.exports.activate = (entryId, data) => {
 				return value
 			})
 }
-//delete product
-//Retrieve single product
+
 module.exports.deleteEntry = (entryId) => {
 	return Entry.findOneAndDelete(entryId).then((result)=>{
 		return result
